@@ -15,8 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        dd($user->testPassword("asdf"));
+        return view('welcome', ["posts" => Post::with("User")->get()]);
     }
 
     /**
