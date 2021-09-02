@@ -15,30 +15,42 @@
         </style>
 
     </head>
-    <body>
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-light">
-      <ul class="nav nav-pills nav-fill">
-        <li class="nav-item"><a href="#" class="nav-link active text-dark" aria-current="page">Garden Gnomes</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Post</a></li>
-      </ul>
-    </header>
-  </div>
+    <body class="bg-grey-dark">
+        <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-dark border-bottom">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item text-white"><a href="#" class="nav-link active text-dark" aria-current="page">Garden Gnomes</a></li>
+            <li class="nav-item text-white"><a href="#" class="nav-link">Login</a></li>
+            <li class="nav-item text-white"><a href="#" class="nav-link disabled">Post</a></li>
+        </ul>
+        </header>
+    </div>
+
+    <div class="container">
+    @foreach ($posts as $post)
+        <div class="jumbotron bg-dark row justify-content-start clearfix ">
+            <h1 class="text-white col-12">{{ $post->caption }}</h1>
+            <p class="text-white col-8">{{ $post->description }}</p>
+            <img src="..." class="img-thumbnail rounded mx-auto col-4" style="width: 200px; height: 200px;">
+            <div>
+                <p class="text-white col-auto"><a>{{ $post->rating }} Likes</a></p>
+                <p class="text-white col-auto">{{ $post->user->name }}</p>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+    @endforeach
+</div>
 
 <div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-light">
-    <p class="col-md-4 mb-0">© 2021 Garden Gnomes, Inc</p>
-
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-    </a>
-
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
+    <p class="col-md-4 mb-0 text-white">© 2021 Garden Gnomes, Inc</p>
     <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2">Login</a></li>
+      <li class="nav-item text-white"><a href="#" class="nav-link active">Home</a></li>
+      <li class="nav-item text-white"><a href="#" class="nav-link px-2">Login</a></li>
     </ul>
   </footer>
 </div>
-    </body>
+</body>
 </html>
