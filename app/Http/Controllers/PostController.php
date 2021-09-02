@@ -14,9 +14,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        foreach (Post::all() as $post) {
-            echo $post->caption . "<br />";
-        }
+        dd(Post::with("User")->get());
+        // foreach (Post::all() as $post) {
+        //     echo $post->caption . "<br />";
+        //     echo $post->description;
+        //     echo $post->
+        //     echo "<br />";
+        // }
     }
 
     /**

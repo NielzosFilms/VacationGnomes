@@ -14,4 +14,9 @@ class Post extends Model
         'description',
         'rating',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
