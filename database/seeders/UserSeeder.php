@@ -14,6 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $user = new User();
+
+        $user->name = "admin";
+        $user->password = "asdf";
+        $user->save();
+
         User::factory()
             ->count(10)
             ->hasPosts(1)
