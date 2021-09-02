@@ -52,4 +52,13 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($passwd);
     }
+
+    public function testPassword($passwd)
+    {
+        return Hash::check($passwd, $this->attributes['password']);
+    }
+    public function getAuthPassword()
+    {
+        return $this->attributes["password"];
+    }
 }

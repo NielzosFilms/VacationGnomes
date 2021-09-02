@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,13 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd(Post::with("User")->get());
-        // foreach (Post::all() as $post) {
-        //     echo $post->caption . "<br />";
-        //     echo $post->description;
-        //     echo $post->
-        //     echo "<br />";
-        // }
+        $user = User::find(1);
+        dd($user->testPassword("asdf"));
     }
 
     /**
