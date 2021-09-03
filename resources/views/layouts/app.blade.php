@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="{{Auth::check() == true ? 'nav-link' : 'nav-link disabled'}}" href="{{ route('create') }}" >{{ __('Create post') }}</a>
+                            <a class="{{Auth::check() == true ? 'nav-link' : 'nav-link disabled'}}" href="{{ route('posts.create') }}" >{{ __('Create post') }}</a>
                         </li>
                     </ul>
 

@@ -24,7 +24,7 @@
     @foreach ($posts as $post)
         <div class="card" style="margin-bottom:15px;">
             <div class="card-header h4">
-                {{$post->caption}}
+                <a href="{{$post->id}}">{{$post->caption}}</a>
             </div>
             <div class="card-body">
                 <p class="card-text">{{$post->description}}</p>
@@ -33,10 +33,10 @@
             <div class="card bg-dark text-white" style="background-repeat: no-repeat; background-position: center; background-size: 100%; width:100%; height:360px; background-image: url({{$post->image}});">
                 {{-- <img class="card-img-bottom img-fluid rounded" alt="100%x180" style="height: 360px; width: 100%; display: block;" src="{{$post->image}}" data-holder-rendered="true"> --}}
                 <div class="card-img-overlay">
-                <button type="button" class="btn btn-primary">Likes: {{$post->rating}}</button><p>
+                    <button type="button" class="btn btn-primary">Likes: {{$post->rating}}</button><p>
+                </div>
             </div>
         </div>
-    </div>
     @endforeach
     </div>
 </body>

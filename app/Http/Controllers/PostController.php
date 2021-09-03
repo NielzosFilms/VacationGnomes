@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('welcome', ["posts" => Post::with("User")->get()]);
+        return view('posts.index', ["posts" => Post::with("User")->get()]);
     }
 
     /**
@@ -30,7 +30,7 @@ class PostController extends Controller
         if (Auth::check()) {
             return view('posts.create', ['post' => null]);
         }
-        return redirect()->route('index');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -52,7 +52,7 @@ class PostController extends Controller
 
             $post->save();
         }
-        return redirect()->route('index');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -63,8 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        echo $post["caption"] . "<br />";
-        echo $post["description"] . "<br />";
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
@@ -78,7 +77,7 @@ class PostController extends Controller
         if (Auth::check()) {
             return view('posts.create', ['post' => $post]);
         } else {
-            return redirect()->route('index');
+            return redirect()->route('posts.index');
         }
     }
 
@@ -93,7 +92,7 @@ class PostController extends Controller
     {
         if (Auth::check()) {
         } else {
-            return redirect()->route('index');
+            return redirect()->route('posts.index');
         }
     }
 
