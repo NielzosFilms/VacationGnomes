@@ -15,42 +15,29 @@
         </style>
 
     </head>
-    <body class="bg-grey-dark">
-        <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-dark border-bottom">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item text-white"><a href="#" class="nav-link active text-dark" aria-current="page">Garden Gnomes</a></li>
-            <li class="nav-item text-white"><a href="#" class="nav-link">Login</a></li>
-            <li class="nav-item text-white"><a href="#" class="nav-link disabled">Post</a></li>
-        </ul>
-        </header>
-    </div>
+@include('layouts.app')
+ 
+
+@section('content')
 
     <div class="container">
     @foreach ($posts as $post)
-        <div class="jumbotron bg-dark row justify-content-start clearfix ">
-            <h1 class="text-white col-12">{{ $post->caption }}</h1>
-            <p class="text-white col-8">{{ $post->description }}</p>
-            <img src="{{$post->image}}" class="img-thumbnail rounded mx-auto col-4" style="width: 200px; height: 200px;">
-            <div>
-                <p class="text-white col-auto"><a>{{ $post->rating }} Likes</a></p>
-                <p class="text-white col-auto">{{ $post->user->name }}</p>
+        <div class="card" style="margin-bottom:15px;">
+            <div class="card-header h4">
+                {{$post->caption}}
             </div>
-            <div class="row">
-
+            <div class="card-body">
+                <p class="card-text">{{$post->description}}</p>
+                <p class="card-text"><small class="text-muted">{{$post->user->name}} - {{$post->created_at->diffForHumans()}}</small></p>
+            </div>
+            <div class="card bg-dark text-white ">
+                <img class="card-img-bottom img-fluid rounded" alt="100%x180" style="height: 360px; width: 100%; display: block;" src="{{$post->image}}" data-holder-rendered="true">
+                <div class="card-img-overlay">
+                <button type="button" class="btn btn-primary">Likes: {{$post->rating}}</button><p>
             </div>
         </div>
+    </div>
     @endforeach
-</div>
-
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
-    <p class="col-md-4 mb-0 text-white">© 2021 Garden Gnomes, Inc</p>
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item text-white"><a href="#" class="nav-link active">Home</a></li>
-      <li class="nav-item text-white"><a href="#" class="nav-link px-2">Login</a></li>
-    </ul>
-  </footer>
-</div>
+    </div>
 </body>
 </html>
