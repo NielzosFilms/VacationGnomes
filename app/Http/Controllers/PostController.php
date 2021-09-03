@@ -24,7 +24,15 @@ class PostController extends Controller
     {
 
         // dd($_GET);
-        return view('posts.index', ["posts" => Post::with("user")->orderBy("rating", "desc")->get()]);
+        if (isset($_GET["sort"])) {
+            if ($_GET["sort"] == "rating") {
+                return view('posts.index', ["posts" => Post::with("user")->orderBy("rating", "desc")->get()]);
+            } else {
+                return view('posts.index', ["posts" => Post::with("user")->orderBy("created_at", "desc")->get()]);
+            }
+        } else {
+            return view('posts.index', ["posts" => Post::with("user")->get()]);
+        }
     }
 
     /**
