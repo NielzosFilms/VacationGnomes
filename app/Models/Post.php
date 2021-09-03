@@ -13,6 +13,7 @@ class Post extends Model
         'caption',
         'description',
         'rating',
+        'image',
     ];
 
     public function user()

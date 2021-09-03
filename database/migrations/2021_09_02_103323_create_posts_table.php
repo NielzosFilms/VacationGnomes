@@ -17,7 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('caption');
             $table->string('description');
-            $table->integer('rating');
+            $table->integer('rating')->default("0");
+            $table->longText('image');
             $table->integer('user_id');
             $table->timestamps();
         });

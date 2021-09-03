@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PostController extends Controller
 {
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create', ['post' => null]);
     }
 
     /**
@@ -36,7 +37,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $post = new Post();
+        $post->caption = $request["caption"];
+        $post->description = $request["description"];
+        $post->user_id = 1;
+
+        // $path = $request->file('image')->getRealPath();
+        // $image = file_get_contents($path);
+        // $base64 = base64_encode($image);
+        $post->image = Image::make($request->file('image'))->encode('data-url');
+
+        $post->save();
     }
 
     /**
@@ -47,7 +59,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        echo $post["caption"] . "<br />";
+        echo $post["description"] . "<br />";
     }
 
     /**
@@ -58,7 +71,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.create', ['post' => $post]);
     }
 
     /**

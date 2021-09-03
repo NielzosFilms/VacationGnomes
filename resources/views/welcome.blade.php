@@ -31,7 +31,7 @@
         <div class="jumbotron bg-dark row justify-content-start clearfix ">
             <h1 class="text-white col-12">{{ $post->caption }}</h1>
             <p class="text-white col-8">{{ $post->description }}</p>
-            <img src="..." class="img-thumbnail rounded mx-auto col-4" style="width: 200px; height: 200px;">
+            <img src="{{$post->image}}" class="img-thumbnail rounded mx-auto col-4" style="width: 200px; height: 200px;">
             <div>
                 <p class="text-white col-auto"><a>{{ $post->rating }} Likes</a></p>
                 <p class="text-white col-auto">{{ $post->user->name }}</p>
