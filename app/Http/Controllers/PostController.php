@@ -46,7 +46,9 @@ class PostController extends Controller
         // $path = $request->file('image')->getRealPath();
         // $image = file_get_contents($path);
         // $base64 = base64_encode($image);
-        $post->image = Image::make($request->file('image'))->encode('data-url');
+        $post->image = Image::make($request->file('image'))->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('data-url');
 
         $post->save();
     }
