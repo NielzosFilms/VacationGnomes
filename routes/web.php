@@ -17,5 +17,6 @@ use App\Http\Controllers\PostController;
 Route::resource('/posts', PostController::class);
 
 Route::get('/user', [PostController::class, 'userPosts']);
+Route::get('/likePost/{post}', [PostController::class, 'likePost']);
 
 Auth::routes();
