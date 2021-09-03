@@ -15,42 +15,29 @@
         </style>
 
     </head>
-    <body class="bg-grey-dark">
-        <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-dark border-bottom">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item text-white"><a href="#" class="nav-link active text-dark" aria-current="page">Garden Gnomes</a></li>
-            <li class="nav-item text-white"><a href="#" class="nav-link">Login</a></li>
-            <li class="nav-item text-white"><a href="#" class="nav-link disabled">Post</a></li>
-        </ul>
-        </header>
-    </div>
+@include('layouts.app')
+ 
+
+@section('content')
 
     <div class="container">
     @foreach ($posts as $post)
-        <div class="jumbotron bg-dark row justify-content-start clearfix ">
-            <h1 class="text-white col-12">{{ $post->caption }}</h1>
-            <p class="text-white col-8">{{ $post->description }}</p>
-            <img src="..." class="img-thumbnail rounded mx-auto col-4" style="width: 200px; height: 200px;">
-            <div>
-                <p class="text-white col-auto"><a>{{ $post->rating }} Likes</a></p>
-                <p class="text-white col-auto">{{ $post->user->name }}</p>
+        <div class="card" style="margin-bottom:15px;">
+            <div class="card-header h4">
+                {{$post->caption}}
             </div>
-            <div class="row">
-
+            <div class="card-body">
+                <p class="card-text">{{$post->description}}</p>
+                <p class="card-text"><small class="text-muted">{{$post->user->name}} - {{$post->created_at->diffForHumans()}}</small></p>
+            </div>
+            <div class="card bg-dark text-white ">
+                <img class="card-img-bottom img-fluid rounded" data-src="holder.js/100px180/" alt="100%x180" style="height: 360px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%221150%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201150%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17baab01a9e%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A58pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17baab01a9e%22%3E%3Crect%20width%3D%221150%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22407.98333740234375%22%20y%3D%22115.8%22%3E1150x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                <div class="card-img-overlay">
+                <button type="button" class="btn btn-primary">Likes: {{$post->rating}}</button><p>
             </div>
         </div>
+    </div>
     @endforeach
-</div>
-
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-dark">
-    <p class="col-md-4 mb-0 text-white">© 2021 Garden Gnomes, Inc</p>
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item text-white"><a href="#" class="nav-link active">Home</a></li>
-      <li class="nav-item text-white"><a href="#" class="nav-link px-2">Login</a></li>
-    </ul>
-  </footer>
-</div>
+    </div>
 </body>
 </html>
