@@ -36,6 +36,20 @@
                         <li class="nav-item">
                             <a class="{{Auth::check() == true ? 'nav-link' : 'nav-link disabled'}}" href="{{ route('posts.create') }}" >{{ __('Create post') }}</a>
                         </li>
+                        @if (Route::is('posts.*'))
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <form method="get" action="../posts">
+                                    <input type="submit" class="dropdown-item" value="rating" name="sort">
+                                    <input type="submit" class="dropdown-item" value="date" name="sort">
+                                    </form>
+                                </div>
+                                </div>
+                            @endif
+                            
                     </ul>
 
                     <!-- Right Side Of Navbar -->
