@@ -109,4 +109,14 @@ class PostController extends Controller
             return redirect()->route('index');
         }
     }
+
+    public function userPosts()
+    {
+        if (Auth::check()) {
+            $posts = Auth::user()->posts;
+            return view('posts.index', ["posts" => $posts]);
+        } else {
+            return redirect()->route('index');
+        }
+    }
 }

@@ -19,7 +19,9 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
 
     // use Request;
 
@@ -59,5 +61,11 @@ class LoginController extends Controller
     public function username()
     {
         return 'name';//or new email name if you changed
+    }
+
+    public function logout(Request $request)
+    {
+        $this->performLogout($request);
+        return redirect()->route('posts.index');
     }
 }

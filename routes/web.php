@@ -16,4 +16,6 @@ use App\Http\Controllers\PostController;
 
 Route::resource('/posts', PostController::class);
 
+Route::get('/user', [PostController::class, 'userPosts']);
+
 Auth::routes();
