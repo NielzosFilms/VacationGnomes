@@ -22,9 +22,16 @@
 
     <div class="container">
     @foreach ($posts as $post)
+
         <div class="card" style="margin-bottom:15px;">
-            <div class="card-header h4">
-                <a class="url text-secondary" href="posts/{{$post->id}}">{{$post->caption}}</a>
+            <div class="card-header h4 d-flex">
+                <a class="url text-secondary mr-auto p-2" href="posts/{{$post->id}}">{{$post->caption}}</a>
+                    @if (Auth::id() == $post->user_id)
+                    <a  href="{{route("posts.edit", $post)}}" class="url btn btn-primary p-2" style="margin-left: 10px">Edit</a>
+                    <form method="delete" action="{{route("posts.destroy", $post)}}">
+                        <a class="url btn btn-primary p-2" style="margin-left: 10px">Delete</a>
+                    </form>
+                    @endif
             </div>
             <div class="card-body">
                 <p class="card-text">{{$post->description}}</p>
