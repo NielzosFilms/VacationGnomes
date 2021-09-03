@@ -24,7 +24,7 @@
     @foreach ($posts as $post)
         <div class="card" style="margin-bottom:15px;">
             <div class="card-header h4">
-                <a href="{{$post->id}}">{{$post->caption}}</a>
+                <a class="url text-secondary" href="posts/{{$post->id}}">{{$post->caption}}</a>
             </div>
             <div class="card-body">
                 <p class="card-text">{{$post->description}}</p>

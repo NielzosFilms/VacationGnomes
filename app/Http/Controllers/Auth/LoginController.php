@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->route('index');
+        return redirect()->route('posts.index');
     }
 
     protected function validateLogin(Request $request)
