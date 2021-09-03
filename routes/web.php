@@ -14,15 +14,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::resource('/', PostController::class);
-// Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-// Route::get('/posts/store', [PostController::class, 'store'])->name('posts.store');
-// Route::get('/', [PostController::class, 'index']);
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
