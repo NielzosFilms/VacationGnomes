@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -26,7 +27,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create', ['post' => null]);
+        if (Auth::check()) {
+            return view('posts.create', ['post' => null]);
+        }
+        return redirect()->route('index');
+        // dd(Auth::check());
     }
 
     /**
@@ -37,20 +42,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $post = new Post();
-        $post->caption = $request["caption"];
-        $post->description = $request["description"];
-        $post->user_id = 1;
+        if (Auth::check()) {
+            $post = new Post();
+            $post->caption = $request["caption"];
+            $post->description = $request["description"];
+            $post->user_id = Auth::id();
+            $post->image = Image::make($request->file('image'))->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('data-url');
 
-        // $path = $request->file('image')->getRealPath();
-        // $image = file_get_contents($path);
-        // $base64 = base64_encode($image);
-        $post->image = Image::make($request->file('image'))->resize(300, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })->encode('data-url');
-
-        $post->save();
+            $post->save();
+        } else {
+            return redirect()->route('index');
+        }
     }
 
     /**
@@ -73,7 +77,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create', ['post' => $post]);
+        if (Auth::check()) {
+            return view('posts.create', ['post' => $post]);
+        } else {
+            return redirect()->route('index');
+        }
     }
 
     /**
@@ -85,6 +93,10 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if (Auth::check()) {
+        } else {
+            return redirect()->route('index');
+        }
         //
     }
 
@@ -96,6 +108,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (Auth::check()) {
+        } else {
+            return redirect()->route('index');
+        }
         //
     }
 }
