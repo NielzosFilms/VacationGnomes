@@ -33,7 +33,8 @@
             <div class="card bg-dark text-white" style="background-repeat: no-repeat; background-position: center; background-size: 100%; width:100%; height:360px; background-image: url({{$post->image}});">
                 {{-- <img class="card-img-bottom img-fluid rounded" alt="100%x180" style="height: 360px; width: 100%; display: block;" src="{{$post->image}}" data-holder-rendered="true"> --}}
                 <div class="card-img-overlay">
-                    <button type="button" class="btn btn-primary">Likes: {{$post->rating}}</button><p>
+                    <a href="/likePost/{{$post->id}}" class="btn btn-primary">Likes: {{$post->rating}}</a>
+                    {{-- <button type="button" >Likes: {{$post->rating}}</button> --}}
                 </div>
             </div>
         </div>

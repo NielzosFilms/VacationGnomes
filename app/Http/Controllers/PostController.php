@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index', ["posts" => Post::with("User")->get()]);
+
+        // dd($_GET);
+        return view('posts.index', ["posts" => Post::with("user")->orderBy("rating", "desc")->get()]);
     }
 
     /**
@@ -27,10 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        if (Auth::check()) {
-            return view('posts.create', ['post' => null]);
-        }
-        return redirect()->route('posts.index');
+        return view('posts.create', ['post' => null]);
     }
 
     /**
@@ -41,17 +45,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::check()) {
-            $post = new Post();
-            $post->caption = $request["caption"];
-            $post->description = $request["description"];
-            $post->user_id = Auth::id();
-            $post->image = Image::make($request->file('image'))->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('data-url');
+        $validated = $request->validate([
+            'caption' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+            'image' => ['required'],
+        ]);
+        $post = new Post();
+        $post->caption = $request["caption"];
+        $post->description = $request["description"];
+        $post->user_id = Auth::id();
+        $post->image = Image::make($request->file('image'))->resize(500, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('data-url');
 
-            $post->save();
-        }
+        $post->save();
         return redirect()->route('posts.index');
     }
 
@@ -74,11 +81,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        if (Auth::check()) {
-            return view('posts.create', ['post' => $post]);
-        } else {
-            return redirect()->route('posts.index');
-        }
+        return view('posts.create', ['post' => $post]);
     }
 
     /**
@@ -90,10 +93,6 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if (Auth::check()) {
-        } else {
-            return redirect()->route('posts.index');
-        }
     }
 
     /**
@@ -104,19 +103,18 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (Auth::check()) {
-        } else {
-            return redirect()->route('index');
-        }
     }
 
     public function userPosts()
     {
-        if (Auth::check()) {
-            $posts = Auth::user()->posts;
-            return view('posts.index', ["posts" => $posts]);
-        } else {
-            return redirect()->route('index');
-        }
+        $posts = Auth::user()->posts;
+        return view('posts.index', ["posts" => $posts]);
+    }
+
+    public function likePost(Post $post)
+    {
+        $post->rating = $post->rating + 1;
+        $post->save();
+        return redirect()->route('posts.index');
     }
 }
