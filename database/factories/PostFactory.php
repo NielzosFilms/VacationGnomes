@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'caption' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'rating' => $this->faker->numberBetween(0, 100),
-            'image' => "http://lorempixel.com/g/400/200/",
+            'image' => "https://i.stack.imgur.com/y9DpT.jpg",
         ];
     }
 }
