@@ -31,7 +31,6 @@ class PostController extends Controller
             return view('posts.create', ['post' => null]);
         }
         return redirect()->route('index');
-        // dd(Auth::check());
     }
 
     /**
@@ -97,7 +96,6 @@ class PostController extends Controller
         } else {
             return redirect()->route('index');
         }
-        //
     }
 
     /**
@@ -112,6 +110,5 @@ class PostController extends Controller
         } else {
             return redirect()->route('index');
         }
-        //
     }
 }
