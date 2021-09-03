@@ -33,7 +33,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="{{Auth::check() == true ? 'nav-link' : 'nav-link disabled'}}" href="{{ route('create') }}" >{{ __('Create post') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -46,14 +46,13 @@ class PostController extends Controller
             $post->caption = $request["caption"];
             $post->description = $request["description"];
             $post->user_id = Auth::id();
-            $post->image = Image::make($request->file('image'))->resize(300, null, function ($constraint) {
+            $post->image = Image::make($request->file('image'))->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode('data-url');
 
             $post->save();
-        } else {
-            return redirect()->route('index');
         }
+        return redirect()->route('index');
     }
 
     /**
